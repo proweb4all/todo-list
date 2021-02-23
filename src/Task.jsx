@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const Task = ({id, done, text, onChange, onDelete}) => {
+const Task = ({id, text, done, onChange, onDelete}) => {
   const taskClasses = classNames('list-item', {'list-item_done': done})
   return (
     <li className={taskClasses}>
