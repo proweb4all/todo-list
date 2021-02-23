@@ -47,7 +47,7 @@ code {
   }
   &_done {
     opacity: .7;
-    .list-item__test {
+    .list-item__text {
       text-decoration: line-through;
     }
   }
@@ -59,7 +59,7 @@ code {
     height: 24px;
     border-radius: 50%;
     outline: none;
-    //background: transparent;
+    background: transparent;
     border: none;
     margin-left: auto;
     text-decoration: none;
@@ -69,6 +69,7 @@ code {
     line-height: 24px;
     text-align: center;
     opacity: .7;
+    cursor: pointer;
     &::before {
       content: '+';
     }

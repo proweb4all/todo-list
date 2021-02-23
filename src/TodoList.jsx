@@ -4,7 +4,7 @@ import TasksList from './TasksList';
 const TodoList = () => {
   return (
     <>
-      <h1 class='title'>Todo list</h1>
+      <h1 className='title'>Todo list</h1>
       <TasksList />
     </>
   );
