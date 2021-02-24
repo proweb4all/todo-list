@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Task /> should display done Task 1`] = `ShallowWrapper {}`;
+
+exports[`<Task /> should display undone Task 1`] = `ShallowWrapper {}`;
