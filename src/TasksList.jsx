@@ -1,59 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Task from './Task';
-import CreateTaskInput from './CreateTaskInput';
-import { createTask, fetchTasksList, updateTask, deleteTask } from './tasksGateway';
 
-class TasksList extends Component {
-  state = {
-    tasks: []
-  }
-  componentDidMount() {
-    this.fetchTasks()
-  }
-  fetchTasks = () => {
-    fetchTasksList().then(tasksList =>
-      this.setState({
-        tasks: tasksList
-      })
-    )
-  }
-  onCreate = text => {
-    const newTask = {
-      text,
-      done: false
-    }
-    createTask(newTask).then(() => this.fetchTasks())
-  }
-  onChangeCheck = id => {
-    const {done, text} = this.state.tasks.find(task => task.id === id)
-    const updatedTask = {
-      text,
-      done: !done
-    }
-    updateTask(id, updatedTask).then(() => this.fetchTasks())
-  }
-  onDeleteTask = id => {
-    deleteTask(id).then(() => this.fetchTasks())
-  }
+const TasksList = ({ tasks, onChangeCheck, onDeleteTask }) => {
+  const sortedList = tasks.slice().sort((a, b) => a.done - b.done)
+  return (
+    <ul className='list' tasks={tasks}>
+      {sortedList.map(task => (
+        <Task
+          key={task.id}
+          {...task}
+          onChange={onChangeCheck}
+          onDelete={onDeleteTask}
+        />
+      ))}
+    </ul>
+  );
+}
 
-  render() {
-    const sortedList = this.state.tasks.slice().sort((a, b) => a.done - b.done)
-    return (
-      <div className="todo-list">
-        <CreateTaskInput onCreate={this.onCreate} />
-        <ul className='list' tasks={this.tasks}>
-          {sortedList.map(task => (
-            <Task 
-              key={task.id} 
-              {...task} 
-              onChange={this.onChangeCheck}
-              onDelete={this.onDeleteTask}
-            />
-          ))}
-        </ul>
-      </div>
-    );
-  }
+TasksList.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+      done: PropTypes.bool,
+      id: PropTypes.string
+    }),
+  ).isRequired,
+  onChangeCheck: PropTypes.func.isRequired,
+  onDeleteTask: PropTypes.func.isRequired
 }
 
 export default TasksList;
