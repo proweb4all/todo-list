@@ -1,6 +1,4 @@
 # ToDoApp on React.js
-## REST API - https://crudcrud.com/api/<id>/tasks, where the current <id> should be taken from the resource https://crudcrud.com
-
 
 
 # Getting Started with Create React App
