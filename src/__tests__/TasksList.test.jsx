@@ -7,7 +7,16 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('<TasksList />', () => {
   it('should display todolist', () => {
-    const wrappedComponent = shallow(<TasksList />)
-    expect(wrappedComponent.find('.todo-list').exists()).toBeTruthy()
+    const props = {
+      onChangeCheck: jest.fn(), 
+      onDeleteTask: jest.fn(),
+      tasks: [
+        {text: 'Task 1', done: true, id: 'task-id-1'},
+        {text: 'Task 2', done: false, id: 'task-id-2'},
+        {text: 'Task 3', done: true, id: 'task-id-3'},
+      ], 
+    }
+    const wrappedComponent = shallow(<TasksList {...props} />)
+    expect(wrappedComponent).toMatchSnapshot()
   })
 })
